@@ -1,0 +1,26 @@
+services:
+  ####################### MYSQL #######################
+  mysql:
+    image: mysql:9.1
+    container_name: coffeebook-data
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin 
+      - MYSQL_DATABASE=coffeebook
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=password
+    volumes:
+      - coffeebook:/data/mysql
+    ports:
+      - '3306:3306'
+    networks:
+      - webapi_network
+    restart: unless-stopped
+    # env_files:
+    #   - ./app.env
+
+volumes:
+  coffeebook:
+
+networks:
+  webapi_network:
+    driver: bridge

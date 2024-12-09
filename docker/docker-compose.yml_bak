@@ -1,0 +1,25 @@
+services:
+  ####################### POSTGRES #######################
+  postgres:
+    image: postgres:alpine
+    container_name: coffeebook-data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=coffeebook
+    volumes:
+      - coffeebook:/data/postgres
+    ports:
+      - '5432:5432'
+    networks:
+      - webapi_network
+    restart: unless-stopped
+    # env_files:
+    #   - ./app.env
+
+volumes:
+  coffeebook:
+
+networks:
+  webapi_network:
+    driver: bridge
